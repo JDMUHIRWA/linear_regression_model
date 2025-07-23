@@ -71,7 +71,8 @@ class StudentData(BaseModel):
                 "sports": 1,
                 "music": 0,
                 "volunteering": 1,
-                "grade_class": 2
+                "grade_class": 2,
+                "description": "Example student data for GPA prediction"
             }
         }
 
@@ -218,14 +219,13 @@ async def predict_gpa(student_data: StudentData):
         raise HTTPException(
             status_code=400,
             detail=f"Prediction error: {str(e)}"
-        )
+        ) from e
 
 @app.get("/model-info")
 async def get_model_info():
     """Get information about the trained model"""
     if model is None:
         raise HTTPException(status_code=500, detail="Model not loaded")
-    
     return {
         "model_type": "Linear Regression",
         "test_r2_score": 0.9566,
