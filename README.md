@@ -83,8 +83,8 @@ Three regression models were trained and compared:
 - **Endpoints:** `/predict`, `/health`, `/model-info`
 - **CORS:** Enabled for frontend integration
 - **Input Validation:** Pydantic models with type and range constraints
-- **Swagger UI:** [https://your-app-name.onrender.com/docs](https://your-app-name.onrender.com/docs)
-- **Live Prediction Endpoint:** [https://your-app-name.onrender.com/predict](https://your-app-name.onrender.com/predict)
+- **Swagger UI:** [https://linear-regression-model-ofxu.onrender.com/docs](https://linear-regression-model-ofxu.onrender.com/docs)
+- **Live Prediction Endpoint:** [https://linear-regression-model-ofxu.onrender.com/predict](https://linear-regression-model-ofxu.onrender.comm/predict)
 
 **Example Request:**
 ```json
