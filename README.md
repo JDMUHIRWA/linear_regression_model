@@ -6,6 +6,16 @@ This project predicts academic success (GPA) for African American high school st
 
 ---
 
+## 🎥 Demo Video
+[Demo](https://www.veed.io/view/1a9feda0-5239-4fc3-bbd2-b492735d1731?panel=share)
+- Demonstrates:
+  - Jupyter notebook model training and evaluation
+  - API testing with Swagger UI
+  - Flutter mobile app making predictions
+  - Presenter on camera, clear explanation of model performance and deployment
+
+---
+
 ## 📊 Dataset Description
 
 The dataset contains detailed information on 2,392 high school students, including demographics, study habits, parental involvement, extracurricular activities, and academic performance. The analysis focuses on African American students (Ethnicity = 1) to provide actionable insights for this group.
@@ -138,16 +148,6 @@ POST /predict
 2. Update API endpoint in `lib/main.dart`
 3. Run `flutter pub get`
 4. Launch with `flutter run`
-
----
-
-## 🎥 Demo Video
-[Demo](https://www.veed.io/view/1a9feda0-5239-4fc3-bbd2-b492735d1731?panel=share)
-- Demonstrates:
-  - Jupyter notebook model training and evaluation
-  - API testing with Swagger UI
-  - Flutter mobile app making predictions
-  - Presenter on camera, clear explanation of model performance and deployment
 
 ---
 
