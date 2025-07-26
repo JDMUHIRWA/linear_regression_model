@@ -40,6 +40,7 @@ except FileNotFoundError as e:
 
 # Pydantic model for request validation
 class StudentData(BaseModel):
+    """Model for student data input"""
     # Note: Based on your sample, you have these 13 features (excluding StudentID)
     age: int = Field(..., ge=15, le=18, description="Student age (15-18 years)")
     gender: int = Field(..., ge=0, le=1, description="Gender: 0=Male, 1=Female")
@@ -57,6 +58,7 @@ class StudentData(BaseModel):
     grade_class: int = Field(..., ge=0, le=4, description="Current grade class (0-4)")
 
     class Config:
+        """Configuration for Pydantic model"""
         schema_extra = {
             "example": {
                 "age": 16,
@@ -77,6 +79,7 @@ class StudentData(BaseModel):
         }
 
 class PredictionResponse(BaseModel):
+    """Response model for GPA prediction"""
     predicted_gpa: float
     grade_category: str
     confidence_level: str
@@ -84,6 +87,7 @@ class PredictionResponse(BaseModel):
 
 @app.get("/")
 async def root():
+    """Root endpoint to provide API information"""
     return {
         "message": "African American Student GPA Predictor API",
         "version": "1.0.0",
@@ -96,6 +100,7 @@ async def root():
 
 @app.get("/health")
 async def health_check():
+    """Health check endpoint to verify model and scaler status"""
     model_status = "loaded" if model is not None else "not loaded"
     return {
         "status": "healthy",
@@ -128,7 +133,7 @@ def get_confidence_level(gpa: float) -> str:
 def analyze_success_factors(student_data: StudentData) -> dict:
     """Analyze key success factors for the student"""
     factors = {}
-    
+
     # Study time impact
     if student_data.study_time_weekly >= 15:
         factors["study_time"] = "High positive impact"
@@ -136,7 +141,7 @@ def analyze_success_factors(student_data: StudentData) -> dict:
         factors["study_time"] = "Moderate positive impact"
     else:
         factors["study_time"] = "Low impact - consider increasing"
-    
+   
     # Parental support
     if student_data.parental_support >= 3:
         factors["parental_support"] = "Strong support system"
@@ -144,7 +149,6 @@ def analyze_success_factors(student_data: StudentData) -> dict:
         factors["parental_support"] = "Moderate support"
     else:
         factors["parental_support"] = "Limited support"
-    
     # Attendance
     if student_data.absences <= 5:
         factors["attendance"] = "Excellent attendance"
@@ -152,7 +156,6 @@ def analyze_success_factors(student_data: StudentData) -> dict:
         factors["attendance"] = "Good attendance"
     else:
         factors["attendance"] = "Attendance concerns"
-    
     # Extracurricular balance
     activity_count = sum([
         student_data.extracurricular,
@@ -160,20 +163,19 @@ def analyze_success_factors(student_data: StudentData) -> dict:
         student_data.music,
         student_data.volunteering
     ])
-    
     if activity_count >= 2:
         factors["activities"] = "Well-rounded engagement"
     elif activity_count == 1:
         factors["activities"] = "Some extracurricular involvement"
     else:
         factors["activities"] = "Consider joining activities"
-    
+
     return factors
 
 @app.post("/predict", response_model=PredictionResponse)
 async def predict_gpa(student_data: StudentData):
     """Predict GPA for African American high school student"""
-    
+
     if model is None or scaler is None:
         raise HTTPException(
             status_code=500,
@@ -214,7 +216,7 @@ async def predict_gpa(student_data: StudentData):
             grade_category=grade_category,
             confidence_level=confidence_level,
             success_factors=success_factors
-        )   
+        )
     except Exception as e:
         raise HTTPException(
             status_code=400,
