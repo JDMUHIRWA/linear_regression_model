@@ -498,7 +498,8 @@ class _InputFormPageState extends State<InputFormPage> {
 
     try {
       // Replace with your actual API URL
-      const String apiUrl = 'https://your-app-name.onrender.com/predict';
+      const String apiUrl =
+          'https://linear-regression-model-ofxu.onrender.com/predict';
 
       final response = await http.post(
         Uri.parse(apiUrl),
