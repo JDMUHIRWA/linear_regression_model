@@ -142,7 +142,7 @@ POST /predict
 ---
 
 ## 🎥 Demo Video
-
+[Demo](https://www.veed.io/view/1a9feda0-5239-4fc3-bbd2-b492735d1731?panel=share)
 - Demonstrates:
   - Jupyter notebook model training and evaluation
   - API testing with Swagger UI
